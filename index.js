@@ -11,11 +11,12 @@ let guessesMade = 0;
 let playerWin = false;
 
 /* BUTTONS CLICKS */
-setTimeout(function(){ $(".start-btn").fadeTo(2000, 1);; }, 1000);
+setTimeout(function(){ $(".instructions-container").fadeTo(2000, 1);; }, 1000);
 
 $(".start-btn").click(function() {
+    console.log('btn-clicked');
     startGame();
-    $(".start-btn").fadeTo(1000, 0);
+    $(".instructions-container").fadeOut(500);
     $(".game-wrapper").fadeTo(2000, 1);
 })
 
