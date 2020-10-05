@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Hangman</title>
+</head>
+
+<body>
+
+    <div class="container app-container">
+        <div class="title-container">
+            <h1>Hangman</h1>
+            <button class="btn btn-lg btn-warning start-btn">Start</button>
+        </div>
+
+        <div class="game-wrapper">
+            <div class="game-info-cantainer">
+                <h4>Letters missed: <span id="letters-missed">0</span></h4>
+                <h4>Total guesses made: <span id="guesses-made-count">0</span></h4>
+            </div>
+
+
+            <div class="word-blank-container mb-3">
+                <h2 class="word-blanks">_ _ _ _ _</h2>
+            </div>
+            <div class="keyboard-container">
+                <div class="result-window invisible">
+                    <h4 class="result-window-text"></h4>
+                    <button class="btn btn-warning play-again-btn">Play Again</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="btn btn-secondary keyboard-btn" id="q-btn" value="q">Q</button>
+                    <button class="btn btn-secondary keyboard-btn" id="w-btn" value="w">W</button>
+                    <button class="btn btn-secondary keyboard-btn" id="e-btn" value="e">E</button>
+                    <button class="btn btn-secondary keyboard-btn" id="r-btn" value="r">R</button>
+                    <button class="btn btn-secondary keyboard-btn" id="t-btn" value="t">T</button>
+                    <button class="btn btn-secondary keyboard-btn" id="y-btn" value="y">Y</button>
+                    <button class="btn btn-secondary keyboard-btn" id="u-btn" value="u">U</button>
+                    <button class="btn btn-secondary keyboard-btn" id="i-btn" value="i">I</button>
+                    <button class="btn btn-secondary keyboard-btn" id="o-btn" value="o">O</button>
+                    <button class="btn btn-secondary keyboard-btn" id="p-btn" value="p">P</button>
+                </div>
+
+                <div class="keyboard-row">
+                    <button class="btn btn-secondary keyboard-btn" id="a-btn" value="a">A</button>
+                    <button class="btn btn-secondary keyboard-btn" id="s-btn" value="s">S</button>
+                    <button class="btn btn-secondary keyboard-btn" id="d-btn" value="d">D</button>
+                    <button class="btn btn-secondary keyboard-btn" id="f-btn" value="f">F</button>
+                    <button class="btn btn-secondary keyboard-btn" id="g-btn" value="g">G</button>
+                    <button class="btn btn-secondary keyboard-btn" id="h-btn" value="h">H</button>
+                    <button class="btn btn-secondary keyboard-btn" id="j-btn" value="j">J</button>
+                    <button class="btn btn-secondary keyboard-btn" id="k-btn" value="k">K</button>
+                    <button class="btn btn-secondary keyboard-btn" id="l-btn" value="l">L</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="btn btn-secondary keyboard-btn" id="z-btn" value="z">Z</button>
+                    <button class="btn btn-secondary keyboard-btn" id="x-btn" value="x">X</button>
+                    <button class="btn btn-secondary keyboard-btn" id="c-btn" value="c">C</button>
+                    <button class="btn btn-secondary keyboard-btn" id="v-btn" value="v">V</button>
+                    <button class="btn btn-secondary keyboard-btn" id="b-btn" value="b">B</button>
+                    <button class="btn btn-secondary keyboard-btn" id="n-btn" value="n">N</button>
+                    <button class="btn btn-secondary keyboard-btn" id="m-btn" value="m">M</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+body {
+    text-align: center;
+    padding: 75px 0px;
+    min-height: 100vh;
+    background-image: url('../images/parchment.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Sansita Swashed', cursive;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+.title-container {
+    position: relative;
+}
+
+.start-btn {
+    position: relative;
+    top: 15px;
+    opacity: 0;
+}
+
+.app-container {
+    padding: 25px 0;
+    border-radius: 15px;
+}
+
+.game-wrapper {
+    opacity: 0;
+}
+
+.keyboard-row {
+    margin: 7px 0;
+}
+
+.keyboard-container {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+}
+
+.keyboard-btn {
+    width: 40px;
+}
+
+.result-window {
+    color: white;
+    position: absolute;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    z-index: 2;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@media (max-width: 430px) {
+    .keyboard-btn {
+        width: 30px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 340px) {
+    .keyboard-btn {
+        width: 26px;
+    }
+}
+
