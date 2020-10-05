@@ -2,22 +2,19 @@
 const comWorldList = ["apple", "something", "banana", "kitten", "hangman", "difficutly", 
 "football", "sandwich", "often", "hidden", "wallet", "pancake", "bathroom", "apartment", "thermostat", "computer", 
 "bamboo", "hierarchy", "landscape", "characterize", "rainforest"];
-let currentWord = "";
-let board = [];
-let missCount = 0;
-let lettersCorrect = 0;
-let playerChoice = "";
-let guessesMade = 0;
-let playerWin = false;
+let currentWord = [];   //computer selected word stored as an array
+let board = [];         //stores blanks for user to see on gamboard
+let missCount = 0;      //letters guessed incorrectly
+let lettersCorrect = 0; //letters guessed correctly
+let guessesMade = 0;    //total guessess made
+let playerWin = false;  //tracks whether player wins the game or not
 
 /* BUTTONS CLICKS */
 setTimeout(function(){ $(".instructions-container").fadeTo(2000, 1);; }, 1000);
 
 $(".start-btn").click(function() {
-    console.log('btn-clicked');
-    startGame();
     $(".instructions-container").fadeOut(500);
-    $(".game-wrapper").fadeTo(2000, 1);
+    startGame();
 })
 
 $('.play-again-btn').click(function() {
@@ -26,16 +23,15 @@ $('.play-again-btn').click(function() {
     setTimeout(function() { 
         clearDisplay();
         startGame();
-        $(".game-wrapper").fadeTo(900, 1); 
-    }, 1500);
+    }, 600);
 })
 
 function enableKeyboardButtons () {
     $('.keyboard-btn').click(function(e) {
         $(this).prop('disabled', true);
         updateGuessesMade();
-        playerChoice = e.target.value;
-        if (checkPlayerChoice()) updateWordBlanks(playerChoice); 
+        let playerChoice = e.target.value;
+        if (currentWord.includes(playerChoice)) updateWordBlanks(playerChoice); 
         else {
             missCount++;
             $('#letters-missed').html(missCount);
@@ -44,22 +40,17 @@ function enableKeyboardButtons () {
     });
 }
 
-/* PLAYER FUNCTIONS */
-function checkPlayerChoice () {
-    let array = currentWord.split('');
-    return (array.includes(playerChoice));
-}
-
 /* COMPUTER FUNCTIONS */
 function startGame() {
     comSelectWord();
     createBlanks();
     enableKeyboardButtons();
+    $(".game-wrapper").fadeTo(900, 1); 
 }
 
 function comSelectWord () {
     let choice = Math.floor(Math.random() * comWorldList.length);
-    currentWord = comWorldList[choice];
+    currentWord = (comWorldList[choice]).split('');
 }
 
   //sets blanks for gameboard based on computer's select word
@@ -67,19 +58,18 @@ function createBlanks () {
     for (let i = 0; i < currentWord.length; i++) {
         board.push('_');
     }
-    $('.word-blanks').html(covertArrayToString(board));
+    $('.word-blanks').html(arrayToFormattedString(board));
 }
 
 /* GAMEBOARD/DISPLAY FUNCTIONS */
 function updateWordBlanks (letter) {
-    let array = currentWord.split('');
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] === letter) {
+    for (let i = 0; i < currentWord.length; i++) {
+        if (currentWord[i] === letter) {
             board.splice(i, 1, letter);
             lettersCorrect++;
         }
     }
-    $('.word-blanks').html(covertArrayToString(board));
+    $('.word-blanks').html(arrayToFormattedString(board));
 }
 
 function updateGuessesMade () {
@@ -111,7 +101,7 @@ function handleEndGame(text) {
 }
 
 /* UTILITY FUNCTIONS */
-function covertArrayToString (array) {
+function arrayToFormattedString (array) {
     let arrayAsString = '';
     for (let i = 0; i < array.length; i++) {
         arrayAsString += `${array[i]} `;
@@ -121,8 +111,7 @@ function covertArrayToString (array) {
 
 /* RESET DATA FUNCTIONS */
 function resetGameData () {
-    currentWord = "";
-    playerChoice = "";
+    currentWord = [];
     missCount = 0;
     lettersCorrect = 0;
     guessesMade = 0;
