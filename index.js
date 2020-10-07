@@ -1,37 +1,40 @@
 /* GLOBAL VARAIABLES */
-const comWorldList = ["apple", "something", "banana", "kitten", "hangman", "difficutly", 
-"football", "sandwich", "often", "hidden", "wallet", "pancake", "bathroom", "apartment", "thermostat", "computer", 
-"bamboo", "hierarchy", "landscape", "characterize", "rainforest"];
-let currentWord = [];   //computer selected word stored as an array
-let board = [];         //stores blanks for user to see on gamboard
-let missCount = 0;      //letters guessed incorrectly
+const comWorldList = ["apple", "something", "banana", "kitten", "hangman", "difficutly",
+    "football", "sandwich", "often", "hidden", "wallet", "pancake", "bathroom", "apartment", "thermostat", "computer",
+    "bamboo", "hierarchy", "landscape", "characterize", "rainforest"
+];
+let currentWord = []; //computer selected word stored as an array
+let board = []; //stores blanks for user to see on gamboard
+let missCount = 0; //letters guessed incorrectly
 let lettersCorrect = 0; //letters guessed correctly
-let guessesMade = 0;    //total guessess made
-let playerWin = false;  //tracks whether player wins the game or not
+let guessesMade = 0; //total guessess made
+let playerWin = false; //tracks whether player wins the game or not
 
 /* BUTTONS CLICKS */
-setTimeout(function(){ $(".instructions-container").fadeTo(2000, 1);; }, 1000);
+setTimeout(function () {
+    $(".instructions-container").fadeTo(2000, 1);;
+}, 1000);
 
-$(".start-btn").click(function() {
+$(".start-btn").click(function () {
     $(".instructions-container").fadeOut(500);
     startGame();
 })
 
-$('.play-again-btn').click(function() {
+$('.play-again-btn').click(function () {
     resetGameData();
     $(".game-wrapper").fadeTo(500, 0);
-    setTimeout(function() { 
+    setTimeout(function () {
         clearDisplay();
         startGame();
     }, 600);
 })
 
-function enableKeyboardButtons () {
-    $('.keyboard-btn').click(function(e) {
+function enableKeyboardButtons() {
+    $('.keyboard-btn').click(function (e) {
         $(this).prop('disabled', true);
         updateGuessesMade();
         let playerChoice = e.target.value;
-        if (currentWord.includes(playerChoice)) updateWordBlanks(playerChoice); 
+        if (currentWord.includes(playerChoice)) updateWordBlanks(playerChoice);
         else {
             missCount++;
             $('#letters-missed').html(missCount);
@@ -42,19 +45,23 @@ function enableKeyboardButtons () {
 
 /* COMPUTER FUNCTIONS */
 function startGame() {
-    comSelectWord();
-    createBlanks();
-    enableKeyboardButtons();
-    $(".game-wrapper").fadeTo(900, 1); 
+    $.get('https://random-word-api.herokuapp.com/word?number=1').then(function (data) {
+        currentWord = data[0];
+        currentWord = currentWord.split('');
+        console.log(currentWord);
+        createBlanks();
+        enableKeyboardButtons();
+        $(".game-wrapper").fadeTo(900, 1);
+    })
 }
 
-function comSelectWord () {
+function comSelectWord() {
     let choice = Math.floor(Math.random() * comWorldList.length);
     currentWord = (comWorldList[choice]).split('');
 }
 
-  //sets blanks for gameboard based on computer's select word
-function createBlanks () {
+//sets blanks for gameboard based on computer's select word
+function createBlanks() {
     for (let i = 0; i < currentWord.length; i++) {
         board.push('_');
     }
@@ -62,7 +69,7 @@ function createBlanks () {
 }
 
 /* GAMEBOARD/DISPLAY FUNCTIONS */
-function updateWordBlanks (letter) {
+function updateWordBlanks(letter) {
     for (let i = 0; i < currentWord.length; i++) {
         if (currentWord[i] === letter) {
             board.splice(i, 1, letter);
@@ -72,12 +79,12 @@ function updateWordBlanks (letter) {
     $('.word-blanks').html(arrayToFormattedString(board));
 }
 
-function updateGuessesMade () {
+function updateGuessesMade() {
     guessesMade++;
     $('#guesses-made-count').html(guessesMade);
 }
 
-function clearDisplay () {
+function clearDisplay() {
     $('#letters-missed').html(missCount);
     $('#guesses-made-count').html(guessesMade);
     $('.result-window').addClass('invisible');
@@ -85,7 +92,7 @@ function clearDisplay () {
 }
 
 /* END GAME FUNCTIONS */
-function checkForEndGame () {
+function checkForEndGame() {
     if (lettersCorrect === currentWord.length) {
         handleEndGame(`<h4>Game Over. You Win!</h4>
         <h4>It took you ${guessesMade} guesses to complete the word.</h4>`);
@@ -101,7 +108,7 @@ function handleEndGame(text) {
 }
 
 /* UTILITY FUNCTIONS */
-function arrayToFormattedString (array) {
+function arrayToFormattedString(array) {
     let arrayAsString = '';
     for (let i = 0; i < array.length; i++) {
         arrayAsString += `${array[i]} `;
@@ -110,7 +117,7 @@ function arrayToFormattedString (array) {
 }
 
 /* RESET DATA FUNCTIONS */
-function resetGameData () {
+function resetGameData() {
     currentWord = [];
     missCount = 0;
     lettersCorrect = 0;
